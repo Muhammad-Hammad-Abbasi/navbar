@@ -19,48 +19,34 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-white dark:bg-gray-900 shadow-md w-full py-3 px-2 md:px-2 lg:px-5 flex justify-between items-center md:flex-wrap lg:flex-nowrap">
-      {/* Left Side (Logo) */}
-      <div className="flex flex-col items-center justify-center">
-      <div className="text-2xl font-bold font-sans text-orange-400 mr-2">
-        MO<span className="text-red-600">MS</span>
-      </div>
-      <p className="text-orange-400 font-sans text-sm">Bringing Moments To Life</p>
+    <nav className="bg-white dark:bg-gray-900 shadow-md w-full py-3 px-4 flex justify-between items-center">
+      {/* Logo Section */}
+      <div className="flex flex-col items-center">
+        <div className="text-2xl font-bold text-orange-400">MO<span className="text-red-600">MS</span></div>
+        <p className="text-orange-400 text-sm">Bringing Moments To Life</p>
       </div>
 
-      {/* Search Bar, Theme Toggle & Bell Icon (Mobile) 
-*/}
+      {/* Mobile Controls */}
       <div className="flex items-center gap-4 md:hidden">
-        <div className="flex justify-center items-center border rounded-full px-2 py-1 bg-gray-100 dark:bg-gray-800">
-          <input
-            type="text"
-            placeholder="Search"
-            className="bg-transparent outline-none text-gray-600 dark:text-white px-3  w-20"
-          />
+        <div className="flex items-center border rounded-full px-2 py-1 bg-gray-100 dark:bg-gray-800">
+          <input type="text" placeholder="Search" className="bg-transparent outline-none text-gray-600 dark:text-white px-2 w-20" />
           <FaSearch className="text-gray-500 dark:text-white" />
         </div>
         <button onClick={toggleTheme} className="text-xl text-gray-500 dark:text-white">
           {darkMode ? <FaSun /> : <FaMoon />}
         </button>
-      </div>
-
-      {/* Hamburger Icon (Mobile) */}
-      <div className="md:hidden">
         <button onClick={() => setMenuOpen(!menuOpen)} className="text-gray-500 dark:text-white text-2xl">
           {menuOpen ? <FaTimes /> : <FaBars />}
         </button>
       </div>
 
-      {/* Navigation Links */}
-      <ul className={`md:flex gap-4 text-gray-700 dark:text-white font-medium md:static md:flex-row md:items-center md:gap-3
-        ${menuOpen ? "block p-4 shadow-lg" : "hidden md:flex"}`}>
-        <li><Link href="#" className="block py-2 px-4 hover:text-orange-500">ABOUT US</Link></li>
-        <li><Link href="#" className="block py-2 px-4 hover:text-orange-500">CATALOG</Link></li>
-        <li><Link href="#" className="block py-2 px-4 hover:text-orange-500">PLACES</Link></li>
-        <li><Link href="#" className="block py-2 px-4 hover:text-orange-500">BLOG</Link></li>
-        <li><Link href="#" className="block py-2 px-4 hover:text-orange-500">CONTACT</Link></li>
-
-        {/* Create Account Button (Mobile) */}
+      {/* Navigation Menu */}
+      <ul className={`absolute md:relative top-28 md:top-auto left-0 w-full md:w-auto md:flex bg-white dark:bg-gray-900 shadow-md md:shadow-none p-4 md:p-0 transition-all duration-300 ease-in-out ${menuOpen ? "block" : "hidden md:flex"}`}>
+        {['ABOUT US', 'CATALOG', 'PLACES', 'BLOG', 'CONTACT'].map((item) => (
+          <li key={item} className="py-2 md:py-0 px-4 text-gray-700 dark:text-white hover:text-orange-500">
+            <Link href="#">{item}</Link>
+          </li>
+        ))}
         <li className="md:hidden mt-2">
           <button className="w-full bg-gradient-to-r from-orange-400 to-red-500 text-white px-4 py-2 rounded-full font-medium">
             Create Account
@@ -68,14 +54,10 @@ export default function Navbar() {
         </li>
       </ul>
 
-      {/* Right Section (Desktop Only) */}
+      {/* Desktop Right Section */}
       <div className="hidden md:flex items-center gap-3">
         <div className="flex items-center border rounded-full px-3 py-1 bg-gray-100 dark:bg-gray-800">
-          <input
-            type="text"
-            placeholder="Search"
-            className="bg-transparent outline-none text-gray-600 w-16 dark:text-white px-1"
-          />
+          <input type="text" placeholder="Search" className="bg-transparent outline-none text-gray-600 dark:text-white px-1 w-16" />
           <FaSearch className="text-gray-500 dark:text-white" />
         </div>
         <FaBell className="text-gray-500 dark:text-white text-lg" />
